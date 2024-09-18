@@ -5,12 +5,15 @@ const jwt = require('jsonwebtoken');
 // Register User
 exports.registerUser = async (req, res) => {
     try {
-        const { firstName, lastName, age, gender, email, password } = req.body;
+        let { firstName, lastName, age, gender, email, password, profileImage } = req.body;
         let user = await User.findOne({ email: email });
         // console.log(user);
         if (user) {
             return res.json({ message: 'User is already registerd!!!' });
         }
+        if (req.file) {
+            profileImage = req.file.path.replace(/\\/g, '/');
+        }   
         let hashPassword = await bcrypt.hash(password, 10);
         // console.log(hashPassword);
         user = await User.create({
@@ -19,8 +22,9 @@ exports.registerUser = async (req, res) => {
             email,
             password: hashPassword,
             age,
-            gender
-        });
+            gender,
+            profileImage
+        })
         res.json({ user, message: 'User register success' });
     } catch (err) {
         console.log(err);
@@ -45,4 +49,9 @@ exports.loginUser = async (req, res) => {
         console.log(err);
         res.json(err);
     }
+};
+
+exports.showProfile = async (req, res) => {
+    res.json(req.user)
 }
+
