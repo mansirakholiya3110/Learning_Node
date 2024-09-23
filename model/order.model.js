@@ -14,7 +14,7 @@ const orderSchema = mongoose.Schema({
             type: Number,
         },
     }],
-    totalAmount:{
+    totalAmount: {
         type: Number
     },
     isDelete: {
