@@ -69,7 +69,6 @@ exports.deleteProduct = async (req, res) => {
         let product = await Product.findOne({ _id: req.query.productId });
         if (!product)
             return res.json({ message: 'Product is not found' });
-
         await fs.unlinkSync(product.ProductImage[0]);
         // console.log(product.ProductImage);
         product = await Product.findByIdAndDelete(product._id);

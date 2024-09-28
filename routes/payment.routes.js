@@ -8,3 +8,4 @@ paymentRoutes.post('/payments',verifyToken,createPayment);
 paymentRoutes.get('/payments', verifyToken,getPayments);
 
 module.exports = paymentRoutes;
+ 

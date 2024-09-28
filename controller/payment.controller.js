@@ -22,7 +22,7 @@ exports.createPayment = async (req, res) => {
         console.error(error);
         res.json({ message: 'Error processing payment', error });
     }
-};
+}; 
 
 exports.getPayments = async (req, res) => {
     try {

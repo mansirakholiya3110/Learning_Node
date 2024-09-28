@@ -4,7 +4,6 @@ const { upload } = require("../middleware/imageUpload");
 
 const ProductRouter = express.Router();
 
-
 ProductRouter.post("/", upload.single('ProductImage'), addProduct);
 ProductRouter.get("/",getAllProduct)
 ProductRouter.get("/single",getProduct)

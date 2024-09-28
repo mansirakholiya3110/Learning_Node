@@ -13,7 +13,7 @@ exports.registerUser = async (req, res) => {
         }
         if (req.file) {
             profileImage = req.file.path.replace(/\\/g, '/');
-        }   
+        }
         let hashPassword = await bcrypt.hash(password, 10);
         // console.log(hashPassword);
         user = await User.create({

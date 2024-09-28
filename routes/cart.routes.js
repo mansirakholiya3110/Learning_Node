@@ -8,4 +8,4 @@ cartRoutes.get("/", verifyToken, getAllCarts);
 cartRoutes.put("/", verifyToken, updateCart);
 cartRoutes.delete("/", verifyToken, deleteCart);
 
-module.exports = cartRoutes;
+module.exports = cartRoutes; 
