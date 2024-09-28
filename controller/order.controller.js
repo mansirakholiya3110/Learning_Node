@@ -13,7 +13,7 @@ exports.addNewOrder = async (req, res) => {
             price: item.product.Price,
             totalPrice: item.quantity * item.product.Price
         }));
-
+    
         let totalAmount = orderItems.reduce((total, item) => total += (item.quantity * item.price), 0);
 
         let order = await Order.create({
