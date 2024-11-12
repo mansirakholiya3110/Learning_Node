@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 // Register User
+
 exports.registerUser = async (req, res) => {
     try {
         let { firstName, lastName, age, gender, email, password, profileImage } = req.body;
@@ -55,4 +56,47 @@ exports.loginUser = async (req, res) => {
 exports.showProfile = async (req, res) => {
     res.json(req.user)
 }
+exports.updateProfile = async (req, res) => {
+    try {
+        let user = req.user;
+        if (!user)
+            return res.json({ message: 'User is not found' });
+        user = await User.findByIdAndUpdate(user._id, { ...req.body }, { new: true })
+        res.json({ user, message: 'Profile Updated...' })
+    } catch (error) {
+        console.log(error);
+        res.json(error)
+    }
+}
 
+exports.deleteProfile = async (req, res) => {
+    try {
+        let user = req.user;
+        if (!user)
+            return res.json({ message: 'User is not found..!' })
+        user = await User.findByIdAndUpdate(user._id, { isDelete: true }, { new: true })
+        res.json({ user, message: 'User is Deleted....!!!!' })
+    } catch (error) {
+        console.log(error);
+        res.json(error)
+    }
+}
+
+
+exports.changePassword = async (req, res) => {
+    try {
+        const { password } = req.body;
+        let user = req.user;
+        // console.log(user);
+        if (user) {
+            return res.json({ message: 'password is already change!!!' });
+        }
+        let hashPassword = await bcrypt.hash(password, 10);
+        // console.log(hashPassword);
+        user = await User.findByIdAndUpdate(user._id, { password: hashPassword }, { new: true })
+        res.json({ user, message: 'Password Updated...' })
+    } catch (error) {
+        console.log(error);
+        res.json(error)
+    }
+}
