@@ -9,8 +9,6 @@ userRoutes.post("/login", loginUser);
 userRoutes.get("/", verifyToken, showProfile);
 userRoutes.put("/", verifyToken, updateProfile);
 userRoutes.delete("/", verifyToken, deleteProfile);
-usersRouter.put("/change", verifyToken, changePassword);
-// userRouter.delete("/", verifyToken, );
-// userRouter.put("/change", verifyToken, changePassword);
+userRoutes.put("/change", verifyToken, changePassword);
 
 module.exports = userRoutes;
